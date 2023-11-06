@@ -2,7 +2,7 @@ import fs from 'fs'
 import { resolve } from 'path'
 
 function validate(file) {
-    const chars = '+1I|l=-(){}_!\n\r '.split('')
+    const chars = '+1I|l=-/(){}_!\n\r '.split('')
     const check = chars.reduce((acc, cur) => {
         return acc.replace(new RegExp(`[${cur}]`, 'g'), '')
     }, file)
@@ -19,7 +19,7 @@ function validate(file) {
 
 function compile(file) {
     const change = {
-        '|': 'while',
+        '/': 'while',
         '_': 'result += \'\\n\' + ',
         'I': 'let',
     }
@@ -38,8 +38,8 @@ const file = fs.readFileSync(
 
 const res = validate(file)
 if (res.success) {
-    const ans = compile(file)
-    console.log(ans)
+    const output = compile(file)
+    console.log(output)
 }
 else {
     console.log(res.msg)
