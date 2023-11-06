@@ -2,10 +2,12 @@
 Only combination of 1 is allowed. For example, 1, 11, 111.
 
 # Operations
-+, -, ==, !=, !, || are the operations you can use. For example, you can obtain 69 by below code.
++, -, ==, !=, !, || are the operations you can use. For example, you can obtain 10 by below code.
+! means 'not' and || means 'or'.
 ```
-11+11+11+11+11+11+1+1+1
+11-1
 ```
+You should make 'and' by ! and ||.
 
 # Boolean
 You can make boolean by == and !=. For example, you can obtain true by below code.
@@ -39,4 +41,10 @@ I l = 1
 ```
 
 # If
-There is no if. You can use while instead of if.
+There is no if. You can use while instead of if. Let l be a condition that you want to check. You can make if by below code.
+```
+I ll = 1 == 1
+/(!(ll || !l)) {
+    ll = 1 != 1
+}
+```
