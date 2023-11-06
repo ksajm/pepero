@@ -1,9 +1,22 @@
 I l = 1+1
 /(l != 111) {
     I ll = 1+1
-    I lll = 1==1
-    /(lll) {
-        ll += l
+    I Il = 1!=1
+    /(!(ll == l || Il)) {
+        I lll = l
+        /(lll != 1-1) {
+            lll -= ll
+
+            I llll = -1
+            /(llll != -l) {
+                /(llll == ) {
+
+                }
+                llll--
+            }
+
+        }
+        ll++
     }
     l++
 }
