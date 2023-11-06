@@ -1,6 +1,3 @@
-import fs from 'fs'
-import { resolve } from 'path'
-
 function validate(file) {
     const chars = '+1I|l=-/(){}_!\n\r '.split('')
     const check = chars.reduce((acc, cur) => {
@@ -28,19 +25,4 @@ function compile(file) {
         file = file.replace(new RegExp(`[${from}]`, 'g'), to)
     }
     return eval(`(() => {let result = ''\n${file}\nreturn result.slice(1)})()`)
-}
-
-
-const file = fs.readFileSync(
-    resolve('test.ppr'),
-    'utf-8'
-)
-
-const res = validate(file)
-if (res.success) {
-    const output = compile(file)
-    console.log(output)
-}
-else {
-    console.log(res.msg)
 }

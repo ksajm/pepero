@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/editor/editor.main.css">
+    <title>pepero problems</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="problem.js"></script>
+    <script src="compiler.js"></script>
+</head>
+<body>
+    <div id="nav">
+        <div onclick="load('A')">A</div>
+        <div onclick="load('B')">B</div>
+        <div onclick="load('C')">C</div>
+        <div onclick="load('D')">D</div>
+        <div onclick="load('E')">E</div>
+    </div>
+    <div id="content">
+        <div id="problem">
+            <h1>문제 제목</h1><br/>
+            <h3>답:</h3>
+            <div id="ans">내용</div>
+        </div>
+        <div id="editor"></div>
+        <div id="result">
+            <h2>실행 결과:</h2>
+            <div id="output">내용</div>
+        </div>
+    </div>
+    <button onclick="execute()">실행</button>
+    <script>
+        let editor
+        let prob = 'A'
+
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
+        require(['vs/editor/editor.main'], () => {
+            editor = monaco.editor.create(document.getElementById('editor'), {
+                value: localStorage['A'] ?? '',
+                language: 'text',
+                theme: 'vs-dark'
+            })
+            load('A')
+        })
+
+        // const user = prompt('이름을 입력해주세요.')
+
+        function load(p) {
+            const code = editor.getValue()
+            localStorage[prob] = code
+            document.querySelector('h1').innerText = problem[p].title
+            document.getElementById('ans').innerText = problem[p].ans
+            editor.setValue(localStorage[p] ?? '')
+            prob = p
+        }
+
+        function execute() {
+            const code = editor.getValue()
+            const res = validate(code)
+            if (res.success) {
+                const output = compile(code)
+                document.getElementById('output').innerText = output
+            }
+            else {
+                alert(res.msg)
+            }
+            localStorage[prob] = code
+        }
+    </script>
+</body>
+</html>
