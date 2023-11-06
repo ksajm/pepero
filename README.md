@@ -2,7 +2,7 @@
 Only combination of 1 is allowed. For example, 1, 11, 111.
 
 # Operations
-+, -, ==, !=, || are the operations you can use. For example, you can obtain 69 by below code.
++, -, ==, !=, !, || are the operations you can use. For example, you can obtain 69 by below code.
 ```
 11+11+11+11+11+11+1+1+1
 ```

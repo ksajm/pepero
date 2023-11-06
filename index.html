@@ -12,11 +12,11 @@
 </head>
 <body>
     <div id="nav">
-        <div onclick="load('A')">A</div>
-        <div onclick="load('B')">B</div>
-        <div onclick="load('C')">C</div>
-        <div onclick="load('D')">D</div>
-        <div onclick="load('E')">E</div>
+        <div id="A" onclick="load('A')">A</div>
+        <div id="B" onclick="load('B')">B</div>
+        <div id="C" onclick="load('C')">C</div>
+        <div id="D" onclick="load('D')">D</div>
+        <div id="E" onclick="load('E')">E</div>
     </div>
     <div id="content">
         <div id="problem">
@@ -45,8 +45,6 @@
             load('A')
         })
 
-        // const user = prompt('이름을 입력해주세요.')
-
         function load(p) {
             const code = editor.getValue()
             localStorage[prob] = code
@@ -62,6 +60,15 @@
             if (res.success) {
                 const output = compile(code)
                 document.getElementById('output').innerText = output
+                if (output == problem[prob].ans) {
+                    alert('AC!')
+                    document.getElementById(prob).style.color = 'green'
+                }
+                else {
+                    console.log(output)
+                    console.log(problem[prob].ans)
+                    document.getElementById(prob).style.color = 'red'
+                }
             }
             else {
                 alert(res.msg)
