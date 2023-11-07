@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans KR' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/editor/editor.main.css">
     <title>pepero problems</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
@@ -21,12 +22,12 @@
     <div id="content">
         <div id="problem">
             <h1>문제 제목</h1><br/>
-            <h3>답:</h3>
+            <h3>목표:<br></br></h3>
             <div id="ans">내용</div>
         </div>
         <div id="editor"></div>
         <div id="result">
-            <h2>실행 결과:</h2>
+            <h2>실행 결과:<br></br></h2>
             <div id="output">내용</div>
         </div>
     </div>
@@ -40,7 +41,9 @@
             editor = monaco.editor.create(document.getElementById('editor'), {
                 value: localStorage['A'] ?? '',
                 language: 'text',
-                theme: 'vs-dark'
+                theme: 'vs-dark',
+                fontFamily: 'EliceDigitalBaeum_Bold',
+                fontSize: 18
             })
             load('A')
         })
@@ -62,8 +65,8 @@
                 const output = compile(code)
                 document.getElementById('output').innerText = output
                 if (output == problem[prob].ans) {
-                    alert('AC!')
-                    document.getElementById(prob).style.color = 'green'
+                    alert(prob + '번 맞았습니다!!')
+                    document.getElementById(prob).style.color = '#17ce3b'
                 }
                 else {
                     console.log(output)
