@@ -6,7 +6,7 @@ function validate(file) {
     if (check !== '') {
         return {
             success: false,
-            msg: `You should only contain ${chars.join(', ')}.\n However, your code contains ${check}.`
+            msg: `코드에 ${chars.join(', ')}만 포함되어야 합니다.\n 현재 코드에는 ${check}가 포함되어 있습니다.`
         }
     }
     return {
