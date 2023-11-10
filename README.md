@@ -22,29 +22,34 @@ _(1+1+1+1+1)
 ```
 
 # Variable
-variable name must can be made of I, l, 1. However, it cannot start with 1. Also, single I cannot be a variable name.
+Variable name must can be made of I, l, 1. However, it cannot start with 1. Also, single I cannot be a variable name.
 You should put I at first to declare variable. (i.e. I is let in javascript) It is block scope.
 ```
-I l = 111
+I ll = 111
+_ll
+```
+In ll, 111 would be saved and 111 would be printed.
+
+# Input
+l has the value of the input. Therefore, you do not need to and should not declare l as a variable. l is only a natural number. Bolow code prints the input.
+```
 _l
 ```
-In l, 111 would be saved and 111 would be printed.
 
 # While
 / is while. For example, you can print 1, 2, 3, 4, 5 by below code.
 ```
-I l = 1
-/(l != 1+1+1+1+1+1) {
-    _l
-    l ++
+I ll = 1
+/(ll != 1+1+1+1+1+1) {
+    _ll
+    ll++
 }
 ```
 
 # If
-There is no if. You can use while instead of if. Let l be a condition that you want to check. You can make if by below code.
+There is no if. You can use while instead of if. Let ll be a condition that you want to check. You can make if by below code.
 ```
-I ll = 1 == 1
-/(!(ll || !l)) {
+/(ll) {
     ll = 1 != 1
 }
 ```
