@@ -14,7 +14,8 @@ function validate(file) {
     }
 }
 
-function compile(file) {
+function compile(input, file) {
+    file = `I l = ${input}\n${file}`
     const change = {
         '/': 'while',
         '_': 'result += \'\\n\' + ',

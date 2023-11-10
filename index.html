@@ -22,62 +22,78 @@
     <div id="content">
         <div id="problem">
             <h1>문제 제목</h1><br/>
-            <h3>목표:<br></br></h3>
-            <div id="ans">내용</div>
+            <h2>예제: l = <span>?</span></h2><br/>
+            <div id="output_ex">내용</div>
         </div>
         <div id="editor"></div>
         <div id="result">
-            <h2>실행 결과:<br></br></h2>
+            <input placeholder="실행할 코드의 l 값"/>
+            <h2>실행 결과:</h2><br/>
             <div id="output">내용</div>
         </div>
     </div>
     <button onclick="execute()">실행</button>
     <script>
+        window.onerror = (msg,file,line) => {
+            alert(msg)
+        }
+
         let editor
         let prob = 'A'
 
         require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
         require(['vs/editor/editor.main'], () => {
             editor = monaco.editor.create(document.getElementById('editor'), {
-                value: localStorage['A'] ?? '',
+                value: localStorage[prob] ?? '',
                 language: 'text',
                 theme: 'vs-dark',
-                fontFamily: 'EliceDigitalBaeum_Bold',
                 fontSize: 18
             })
-            load('A')
+            load(prob)
         })
 
         function load(p) {
             const code = editor.getValue()
             localStorage[prob] = code
             document.querySelector('h1').innerText = problem[p].title
-            document.getElementById('ans').innerText = problem[p].ans
+            document.querySelector('span').innerText = problem[p].ex
+            document.getElementById('output_ex').innerText = problem[p].data[problem[p].ex]
+
             editor.setValue(localStorage[p] ?? '')
+
+            document.querySelector('input').value = problem[p].ex
             document.getElementById('output').innerText = ''
             prob = p
         }
 
         function execute() {
+            const input = document.querySelector('input').value || problem[prob].ex
             const code = editor.getValue()
             const res = validate(code)
+            localStorage[prob] = code
             if (res.success) {
-                const output = compile(code)
+                const output = compile(input, code)
                 document.getElementById('output').innerText = output
-                if (output == problem[prob].ans) {
+                if (isAC(code)) {
                     alert(prob + '번 맞았습니다!!')
                     document.getElementById(prob).style.color = '#17ce3b'
                 }
                 else {
-                    console.log(output)
-                    console.log(problem[prob].ans)
                     document.getElementById(prob).style.color = 'red'
                 }
             }
             else {
                 alert(res.msg)
             }
-            localStorage[prob] = code
+        }
+
+        function isAC(code) {
+            for (const input in problem[prob].data) {
+                const ans = problem[prob].data[input]
+                const output = compile(input, code)
+                if (output != ans) return false
+            }
+            return true
         }
     </script>
 </body>
