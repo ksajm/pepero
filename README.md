@@ -31,7 +31,7 @@ _ll
 In ll, 111 would be saved and 111 would be printed.
 
 # Input
-l has the value of the input. Therefore, you do not need to and should not declare l as a variable. l is only a natural number. Bolow code prints the input.
+l has the value of the input. Therefore, you do not need to and should not declare l as a variable. The initial value of l is always a natural number. Bolow code prints the input.
 ```
 _l
 ```
