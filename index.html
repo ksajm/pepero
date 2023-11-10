@@ -34,7 +34,7 @@
     </div>
     <button onclick="execute()">실행</button>
     <script>
-        window.onerror = (msg,file,line) => {
+        window.onerror = (msg, file, line) => {
             alert(msg)
         }
 
@@ -69,9 +69,8 @@
         function execute() {
             const input = document.querySelector('input').value || problem[prob].ex
             const code = editor.getValue()
-            const res = validate(code)
             localStorage[prob] = code
-            if (res.success) {
+            if (isValidate(code)) {
                 const output = compile(input, code)
                 document.getElementById('output').innerText = output
                 if (isAC(code)) {
@@ -81,9 +80,6 @@
                 else {
                     document.getElementById(prob).style.color = 'red'
                 }
-            }
-            else {
-                alert(res.msg)
             }
         }
 
