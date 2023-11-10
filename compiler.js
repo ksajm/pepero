@@ -5,13 +5,14 @@ function isValidate(file) {
     }, file)
     if (check !== '') {
         throw new Error(`코드에 ${chars.join(', ')}만 포함되어야 합니다.\n 현재 코드에는 ${check}가 포함되어 있습니다.`)
-        return false
     }
     return true
 }
 
 function compile(input, file) {
-    if (!Number.isInteger(input) || l <= 0) throw new Error('l의 초기값은 자연수만 됩니다.')
+    if (!isValidate(input) || input <= 0) {
+        throw new Error(`l의 초기값은 자연수만 됩니다. 현재 l의 초기값은 ${input}입니다.`)
+    }
     file = `I l = ${input}\n${file}`
     const change = {
         '/': 'while',
